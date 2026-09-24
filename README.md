@@ -429,6 +429,121 @@ INNER JOIN products AS p
 
 ---
 
+---
+
+# 🧠 SQL Practice Progress
+
+The practice questions are organized into progressive levels to strengthen both SQL fundamentals and problem-solving ability.
+
+## Level 1 — SQL Fundamentals
+
+The following five questions have been completed using the `ECommerceDB` database.
+
+### 1. Filtering
+
+Find all orders where:
+
+- `amount > 50,000`
+- `status = 'Completed'`
+
+```sql
+SELECT *
+FROM orders
+WHERE amount > 50000
+  AND status = 'Completed';
+```
+
+### 2. Aggregation
+
+Calculate:
+
+- Total revenue
+- Average order value
+- Minimum order value
+- Maximum order value
+- Number of orders
+
+```sql
+SELECT
+    SUM(amount) AS [Total revenue],
+    AVG(amount) AS [Average order value],
+    MIN(amount) AS [Minimum order value],
+    MAX(amount) AS [Maximum order value],
+    COUNT(*) AS [Number of orders]
+FROM orders;
+```
+
+### 3. GROUP BY
+
+Calculate total revenue for each order status.
+
+```sql
+SELECT
+    status,
+    SUM(amount) AS [Total revenue]
+FROM orders
+GROUP BY status;
+```
+
+### 4. HAVING
+
+Find customers whose total spending exceeds 100,000.
+
+```sql
+SELECT
+    c.customer_id,
+    c.customer_name,
+    SUM(o.amount) AS [Total spending]
+FROM customers AS c
+INNER JOIN orders AS o
+    ON c.customer_id = o.customer_id
+GROUP BY
+    c.customer_id,
+    c.customer_name
+HAVING SUM(o.amount) > 100000;
+```
+
+### 5. CASE
+
+Create an order amount category:
+
+|    Order Amount | Category |
+| --------------: | -------- |
+|      `< 10,000` | Low      |
+| `10,000–50,000` | Medium   |
+|      `> 50,000` | High     |
+
+```sql
+SELECT
+    order_id,
+    amount,
+    CASE
+        WHEN amount < 10000 THEN 'Low'
+        WHEN amount >= 10000 AND amount <= 50000 THEN 'Medium'
+        WHEN amount > 50000 THEN 'High'
+    END AS amount_category
+FROM orders;
+```
+
+### Level 1 Concepts Practiced
+
+- `SELECT`
+- `WHERE`
+- `AND`
+- `SUM()`
+- `AVG()`
+- `MIN()`
+- `MAX()`
+- `COUNT()`
+- `GROUP BY`
+- `HAVING`
+- `INNER JOIN`
+- `CASE`
+- Conditional classification
+- Aggregation and filtering of grouped results
+
+**Progress: 5 / 5 questions completed ✅**
+
 # 🎯 SQL Skills Practiced
 
 This database is suitable for practicing the following SQL concepts:
